@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Gracias por tu compra! — Ingles with Flor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #2d4a3e; --gold: #d4845a; --gold-light: #e8a87c;
+    --cream: #f7f4ee; --text: #2a2a1e; --text-muted: #6b6b5a;
+    --white: #ffffff; --radius-lg: 20px;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header { background: var(--navy); padding: 1.25rem 2rem; }
+  header a { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; text-decoration: none; }
+  header a span { color: var(--gold-light); font-style: italic; }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 4rem 1.5rem; }
+  .card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: 0 12px 40px rgba(45,74,62,0.08);
+    max-width: 520px;
+    width: 100%;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .card h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 0.8rem; }
+  .card h1 em { color: var(--gold); font-style: italic; }
+  .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .btn-primary {
+    background: var(--gold); color: var(--white); padding: 0.8rem 2rem;
+    border-radius: 50px; text-decoration: none; font-weight: 500;
+    font-size: 0.95rem; display: inline-block; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); color: var(--navy); }
+  footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<header><a href="index.html">Ingles with Flor <span>·</span></a></header>
+
+<main>
+  <div class="card">
+    <div class="icon">📬</div>
+    <h1>¡Gracias por tu <em>compra</em>!</h1>
+    <p>
+      En unos minutos te va a llegar un email con el link para acceder a tu
+      curso. Si no lo ves en la bandeja de entrada, revisá spam/promociones.
+    </p>
+    <a href="https://wa.me/5492323530200" target="_blank" class="btn-primary">¿No te llegó? Escribime por WhatsApp</a>
+  </div>
+</main>
+
+<footer>© 2025 Ingles with Flor · Florencia Massolo</footer>
+
+</body>
+</html>

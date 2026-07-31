@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu acceso — Ingles with Flor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #2d4a3e;
+    --navy-light: #3a5e4f;
+    --gold: #d4845a;
+    --gold-light: #e8a87c;
+    --cream: #f7f4ee;
+    --cream-dark: #ede8de;
+    --text: #2a2a1e;
+    --text-muted: #6b6b5a;
+    --white: #ffffff;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: var(--navy);
+    padding: 1.25rem 2rem;
+  }
+  header a {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+  header a span { color: var(--gold-light); font-style: italic; }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+  }
+
+  .access-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: 0 12px 40px rgba(45,74,62,0.08);
+    max-width: 560px;
+    width: 100%;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .access-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .access-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+  }
+  .access-card h1 em { color: var(--gold); font-style: italic; }
+  .access-card p.lead {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  .material-block {
+    background: var(--cream);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  .material-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .material-list { list-style: none; }
+  .material-list li { margin-bottom: 0.6rem; }
+  .material-list a {
+    color: var(--navy);
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .material-list a:hover { color: var(--gold); }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--white);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); color: var(--navy); }
+
+  .not-found { color: var(--text-muted); font-size: 0.9rem; }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">Ingles with Flor <span>·</span></a>
+</header>
+
+<main>
+  <div class="access-card" id="access-card">
+    <div class="access-icon">⏳</div>
+    <h1>Verificando tu acceso…</h1>
+    <p class="lead">Un segundo, estamos confirmando tu compra.</p>
+  </div>
+</main>
+
+<footer>© 2025 Ingles with Flor · Florencia Massolo</footer>
+
+<script>
+  /*
+    CÓMO FUNCIONA ESTA PÁGINA
+    -------------------------
+    Al comprar un curso, Mercado Pago avisa a un script de Google (Apps
+    Script) que verifica el pago y le manda al comprador un email con un
+    link único: acceso.html?token=XXXXX.
+
+    Esta página toma ese token y le pregunta al mismo script "¿es válido?".
+    Si lo es, el script devuelve el material del curso; si no, no muestra
+    nada. El material NUNCA está escrito acá en el HTML, así que alguien
+    sin token válido no puede verlo mirando el código fuente.
+
+    PASO ÚNICO ACÁ: reemplazá APPS_SCRIPT_URL de abajo por la URL que te
+    da Google al implementar el Apps Script (terminada en /exec).
+    Instrucciones completas en apps-script/Code.gs del repo.
+  */
+  const APPS_SCRIPT_URL = 'PEGAR-ACA-LA-URL-DE-TU-APPS-SCRIPT-/exec';
+
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  const card = document.getElementById('access-card');
+
+  function mostrarNoEncontrado() {
+    card.innerHTML = `
+      <div class="access-icon">🤔</div>
+      <h1>No encontramos tu acceso</h1>
+      <p class="lead not-found">
+        Si acabás de comprar un curso, revisá el email que te mandamos
+        (a veces cae en spam). Si el problema sigue, escribime por
+        WhatsApp con tu comprobante de pago y te paso el material a mano.
+      </p>
+      <a href="https://wa.me/5492323530200" target="_blank" class="btn-primary">Escribime por WhatsApp</a>
+    `;
+  }
+
+  if (!token) {
+    mostrarNoEncontrado();
+  } else {
+    fetch(APPS_SCRIPT_URL + '?token=' + encodeURIComponent(token))
+      .then(r => r.json())
+      .then(data => {
+        if (!data.ok) { mostrarNoEncontrado(); return; }
+
+        const materialesHtml = data.materiales.map(m =>
+          `<li><a href="${m.url}" target="_blank">🔗 ${m.texto}</a></li>`
+        ).join('');
+
+        card.innerHTML = `
+          <div class="access-icon">🎉</div>
+          <h1>Bienvenido/a a <em>${data.titulo}</em></h1>
+          <p class="lead">Ya tenés acceso a todo el material del curso.</p>
+          <div class="material-block">
+            <h2>Tu material</h2>
+            <ul class="material-list">${materialesHtml}</ul>
+          </div>
+          <a href="https://wa.me/5492323530200" target="_blank" class="btn-primary">¿Dudas? Escribime por WhatsApp</a>
+        `;
+      })
+      .catch(() => mostrarNoEncontrado());
+  }
+</script>
+
+</body>
+</html>
